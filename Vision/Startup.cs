@@ -15,6 +15,9 @@ using Microsoft.Extensions.Hosting;
 using Vision.Data.IRepository;
 using Vision.Data.Repository;
 using Vision.Data.Initializer;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using Vision.Utility;
+using Stripe;
 
 namespace Vision
 {
@@ -33,10 +36,13 @@ namespace Vision
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<IdentityUser, IdentityRole>().AddDefaultTokenProviders()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddSingleton<IEmailSender, EmailSender>();
+
+
             services.AddScoped<IDbInitializer, DbInitializer>();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
