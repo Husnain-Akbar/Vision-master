@@ -15,5 +15,21 @@ namespace Vision.Data.Repository
         {
             this.db = db;
         }
+
+        public void Update(Service service)
+        {
+            var objFromDb = db.Service.FirstOrDefault(s => s.Id == service.Id);
+
+            objFromDb.Name = service.Name;
+            objFromDb.LongDesc = service.LongDesc;
+            objFromDb.Price = service.Price;
+            objFromDb.ImageUrl = service.ImageUrl;
+            objFromDb.FrequencyId = service.FrequencyId;
+            objFromDb.CategoryId = service.CategoryId;
+
+            db.SaveChanges();
+
+        }
+
     }
 }

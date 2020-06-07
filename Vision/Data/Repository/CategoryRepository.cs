@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,6 +15,15 @@ namespace Vision.Data.Repository
         public CategoryRepository(ApplicationDbContext db):base(db)
         {
             this.db = db;
+        }
+
+        public IEnumerable<SelectListItem> GetCategoryListForDropDown()
+        {
+            return db.Category.Select(i => new SelectListItem()
+            {
+                Text = i.Name,
+                Value = i.Id.ToString()
+            });
         }
 
         public void Update(Category category)
