@@ -14,5 +14,18 @@ namespace Vision.Data.Repository
         {
             this.db = db;
         }
+
+        public void Update(Team team)
+        {
+            var objFromDb = db.Teams.FirstOrDefault(s => s.Id == team.Id);
+
+            objFromDb.Name = team.Name;
+            objFromDb.Description = team.Description;
+            objFromDb.Role = team.Role;
+            objFromDb.ImageUrl = team.ImageUrl;
+            db.SaveChanges();
+
+        }
+
     }
 }

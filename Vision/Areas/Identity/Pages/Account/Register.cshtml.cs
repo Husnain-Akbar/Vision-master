@@ -109,8 +109,8 @@ namespace Vision.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            var userlist = _db.ApplicationUser.Where(u => u.Email == Input.Email).FirstOrDefault();
-            if(userlist!=null)
+            var emailexist = _db.ApplicationUser.Where(u => u.Email == Input.Email).FirstOrDefault();
+            if(emailexist != null)
             {
                 return RedirectToAction("Index", "User", new { Area = "Admin" });
 

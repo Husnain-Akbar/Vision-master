@@ -14,8 +14,19 @@ namespace Vision.Data.Repository
         {
             this.db = db;
                 
-        }     
+        }
+        public void Update(Contact contact)
+        {
+            var date = DateTime.Now;
+            var objFromDb = db.Contacts.FirstOrDefault(s => s.Id == contact.Id);
 
+            objFromDb.Name = contact.Name;
+            objFromDb.Email = contact.Email;
+            objFromDb.Message = contact.Message;
+            objFromDb.DateTime = date;
+            db.SaveChanges();
+
+        }
 
     }
 }

@@ -11,6 +11,14 @@ namespace Vision.Utility
         public const string Role_Admin = "Admin";
         public const string Role_Employee = "Employee";
 
+
+
+        public const string SessionCart = "Cart";
+        public const string StatusSubmitted = "Submitted";
+        public const string StatusApproved = "Approved";
+        public const string StatusRejected = "Rejected";
+
+
     }
 
 }

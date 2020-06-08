@@ -8,5 +8,7 @@ namespace Vision.Data.IRepository
 {
     public interface IContactRepository:IRepository<Contact>
     {
+        void Update(Contact contact);
+
     }
 }

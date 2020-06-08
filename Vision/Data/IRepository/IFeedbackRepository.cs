@@ -8,5 +8,7 @@ namespace Vision.Data.IRepository
 {
     public interface IFeedbackRepository:IRepository<Feedback>
     {
+        void Update(Feedback feedback);
+
     }
 }

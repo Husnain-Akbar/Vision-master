@@ -8,5 +8,7 @@ namespace Vision.Data.IRepository
 {
     public interface ITeamRepository : IRepository<Team>
     {
+        void Update(Team team);
+
     }
 }
