@@ -17,6 +17,7 @@ namespace Vision.Data.IRepository
         IFeedbackRepository Feedbacks { get;  }
         IContactRepository Contacts { get;  }
          IUserRepository User { get; }
+        IWebImageRepository WebImageRepository { get; }
         void Save();
     }
 }

@@ -33,10 +33,10 @@ namespace Vision.Controllers
         {
             HomeVM = new HomeViewModel()
             {
-                //WebImagesList = _db.WebImages.ToList(),
+                WebImagesList = _db.WebImages.ToList(),
                 CategoryList = _unitOfWork.Category.GetAll(),
                 ServiceList = _unitOfWork.Service.GetAll(includeProperties: "Frequency"),
-                //TeamList =_unitOfWork.Teams.GetAll(),
+                TeamList =_unitOfWork.Teams.GetAll(),
                 //FeedbackList=_unitOfWork.Feedbacks.GetAll()
             };
 

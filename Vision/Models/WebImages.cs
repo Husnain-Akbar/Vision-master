@@ -13,6 +13,6 @@ namespace Vision.Models
         public string Name { get; set; }
 
 
-        public byte[] Picture { get; set; }
+        public string Picture { get; set; }
     }
 }

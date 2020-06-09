@@ -21,6 +21,7 @@ namespace Vision.Data.Repository
             User = new UserRepository(_db);
             Teams = new TeamRepository(_db);
             Contacts = new ContactRepository(db);
+            WebImageRepository = new WebImagesRepository(_db);
         }
 
         public ICategoryRepository Category { get; private set; }
@@ -32,7 +33,7 @@ namespace Vision.Data.Repository
         public ITeamRepository Teams { get; private set ; }
         public IFeedbackRepository Feedbacks { get; private set ; }
         public IContactRepository Contacts { get ; private set; }
-
+        public IWebImageRepository WebImageRepository { get; private set; }
         public void Dispose()
         {
             _db.Dispose();
