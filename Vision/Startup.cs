@@ -18,6 +18,7 @@ using Vision.Data.Initializer;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Vision.Utility;
 using Stripe;
+using Vision.Models;
 
 namespace Vision
 {

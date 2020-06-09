@@ -15,7 +15,7 @@ namespace Vision.Models.ViewModels
 
         public IEnumerable<Team> TeamList { get; set; }
 
-        public IEnumerable<Feedback> FeedbackList { get; set; }
+        public IEnumerable<FeedbackVM> FeedbackList { get; set; }
 
 
 

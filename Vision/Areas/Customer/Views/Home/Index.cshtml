@@ -71,17 +71,22 @@
             }
         }
 
-        @foreach (var item in Model.TeamList)
-        {
+            <h2 class="font-weight-bolder">Our Team</h2>
+            @foreach (var item in Model.TeamList)
+            {
 
 
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
-                <div class="card-body">
-                    <h3>@item.Name</h3>
-                    <h4>@item.Role</h4>
-                    <p class="card-text">@item.Description.</p>
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
+                        <div class="card-body">
+                            <h3>@item.Name</h3>
+                            <h4>@item.Role</h4>
+                            <p class="card-text">@item.Description.</p>
+                        </div>
+                    
                 </div>
-            </div>
+
         }
-    </div>
+        </div>
+        
+        
