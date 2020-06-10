@@ -18,6 +18,9 @@ namespace Vision.Models
         [ForeignKey("ApplicationUserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
+        [NotMapped]
+        public string Name { get; set; }
+
     }
 
 }

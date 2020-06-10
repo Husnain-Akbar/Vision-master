@@ -13,6 +13,8 @@ using Vision.Models.ViewModels;
 using Vision.Data;
 using Vision.Extension;
 using Vision.Utility;
+using Microsoft.EntityFrameworkCore;
+
 namespace Vision.Controllers
 {
     [Area("Customer")]
@@ -36,8 +38,8 @@ namespace Vision.Controllers
                 WebImagesList = _db.WebImages.ToList(),
                 CategoryList = _unitOfWork.Category.GetAll(),
                 ServiceList = _unitOfWork.Service.GetAll(includeProperties: "Frequency"),
-                TeamList =_unitOfWork.Teams.GetAll(),
-                //FeedbackList=_unitOfWork.Feedbacks.GetAll()
+                TeamList = _unitOfWork.Teams.GetAll(),
+                FeedbackList = _db.Feedbacks.Include(u => u.ApplicationUser).ToList()
             };
 
             return View(HomeVM);

@@ -13,13 +13,13 @@
             <!-- The slideshow -->
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="~/images/lawn1.jpeg" alt="Los Angeles" width="1100" height="500">
+                    <img src="~/images/webimages/lawn1.jpeg" alt="Los Angeles" width="1100" height="500">
                 </div>
                 <div class="carousel-item">
-                    <img src="~/images/lawn2.jpeg" alt="Chicago" width="1100" height="500">
+                    <img src="~/images/webimages/lawn2.jpeg" alt="Chicago" width="1100" height="500">
                 </div>
                 <div class="carousel-item">
-                    <img src="~/images/lawn3.jpeg" alt="New York" width="1100" height="500">
+                    <img src="~/images/webimages/lawn3.jpeg" alt="New York" width="1100" height="500">
                 </div>
             </div>
 
@@ -55,7 +55,8 @@
                                                     <div class="pl-1 text-muted">Price per service</div>
                                                     <div class="pr-1 text-danger h5">$@service.Price</div>
                                                 </div>
-                                                <img src="@service.ImageUrl" class="card-img-top p-2 rounded" />
+                                                <img src="@service.ImageUrl"  
+                                                     class="card-img-top p-2 rounded " height="150" width="150"/>
 
                                                 <div class="text-muted text-center pb-2">@service.Frequency.Name</div>
                                                 <a asp-action="Details" class="btn btn-success" style="border-radius:2px;"
@@ -71,22 +72,35 @@
             }
         }
 
-            <h2 class="font-weight-bolder">Our Team</h2>
-            @foreach (var item in Model.TeamList)
-            {
+        <h2 class="font-weight-bolder">Our Team</h2>
+        @foreach (var item in Model.TeamList)
+        {
 
 
-                    <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
-                        <div class="card-body">
-                            <h3>@item.Name</h3>
-                            <h4>@item.Role</h4>
-                            <p class="card-text">@item.Description.</p>
-                        </div>
-                    
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="@item.ImageUrl" alt="Card image cap">
+                <div class="card-body">
+                    <h3>@item.Name</h3>
+                    <h4>@item.Role</h4>
+                    <p class="card-text">@item.Description.</p>
                 </div>
 
+            </div>
+
         }
+        <h2 class="font-weight-bolder">What Our Customer's Say</h2>
+        @foreach (var item in Model.FeedbackList)
+        {
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@item.ApplicationUser.Name</h5>
+            @*<h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>*@
+            <p class="card-text blockquote"><i>"@item.Comment"</i></p>
+            @*<a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>*@
         </div>
+    </div>
+        }
+    </div>
         
         
