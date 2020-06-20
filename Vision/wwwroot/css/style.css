@@ -1,0 +1,84 @@
+
+.home {
+    background-image: url('../images/rename.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    min-height: 700px;
+    position: relative;
+    overflow: hidden;
+}
+
+.home .titles{
+    width: 100%;
+    height:100%;
+    min-height: 700px;
+    position: absolute;
+    padding: 0 80px;
+    top:0;
+    background-color: rgb(0, 0, 0,0.5);
+}
+.home .titles-wrap{
+    margin-top: 300px;
+}
+
+.home h1{
+    color:#ffffff;
+    width:100%;
+    display: block;
+    margin: 0;
+    font-size: 65px;
+    font-weight: 500;
+    line-height: 1.7;
+}
+
+.home h1 span{
+    color: #c9a04f;
+
+}
+
+.homee h2{
+    color:#ffffff;
+    display: block;
+    font-size: 37px;
+    line-height: 1.7;
+}
+.home h2 span{
+    color: #ffffff;
+
+}
+
+.home p{
+    color: #ffffff;
+    font-size: 28px;
+    margin-top: 20px;
+    max-width: 450px;
+}
+
+.btn{
+    color: #ffffff;
+    background-color: #c9a04f;
+    font-size: 25px;
+    line-height: 40px;
+    letter-spacing: 0.5px;
+    text-align: center;
+    font-weight: 600;
+    text-transform: capitalize;
+    padding: 0 40px;
+    border-radius: 0;
+    position: relative;
+    display: inline-block;
+    border: 2px solid #c9a04f;
+}
+
+.btn:hover{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.travel{
+    position:absolute;
+    left:60%;
+    top:67%;
+}

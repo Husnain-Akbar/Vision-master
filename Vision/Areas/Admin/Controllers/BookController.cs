@@ -5,54 +5,51 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Vision.Data.IRepository;
+using Vision.Data;
 using Vision.Models;
 
 namespace Vision.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class TeamController : Controller
+    public class BookController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
         private readonly IWebHostEnvironment _hostEnvironment;
-
-
-        public TeamController(IUnitOfWork unitOfWork, IWebHostEnvironment hostEnvironment)
+        private readonly ApplicationDbContext _db;
+        public BookController(IWebHostEnvironment hostEnvironment,ApplicationDbContext db)
         {
-            _unitOfWork = unitOfWork;
+            _db = db;
             _hostEnvironment = hostEnvironment;
         }
-
         public IActionResult Index()
         {
-            return View();
+            var book =_db.Books.ToList();
+            return View(book);
         }
 
         public IActionResult Upsert(int? id)
         {
-            Team team = new Team();
+            Book book = new Book();
             if (id == null)
             {
-                return View(team);
+                return View(book);
             }
-            team = _unitOfWork.Teams.Get(id.GetValueOrDefault());
-            if (team == null)
+            book = _db.Books.FirstOrDefault(c => c.Id == id);
+            if (book == null)
             {
                 return NotFound();
             }
-            return View(team);
-
+            return View(book);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert( Team team)
+        public IActionResult Upsert(Book book)
         {
             if (ModelState.IsValid)
             {
                 string webRootPath = _hostEnvironment.WebRootPath;
                 var files = HttpContext.Request.Form.Files;
-                if (team.Id == 0)
+                if (book.Id == 0)
                 {
                     //New Service
                     string fileName = Guid.NewGuid().ToString();
@@ -63,55 +60,56 @@ namespace Vision.Areas.Admin.Controllers
                     {
                         files[0].CopyTo(fileStreams);
                     }
-                    team.ImageUrl = @"\images\team\" + fileName + extension;
+                    book.Image = @"\images\team\" + fileName + extension;
 
-                    _unitOfWork.Teams.Add(team);
+                    _db.Books.Add(book);
                 }
                 else
                 {
                     //Edit Service
-                    var teamdb = _unitOfWork.Teams.Get(team.Id);
+                    var teamdb = _db.Books.FirstOrDefault(c => c.Id == book.Id);
                     if (files.Count > 0)
                     {
                         string fileName = Guid.NewGuid().ToString();
                         var uploads = Path.Combine(webRootPath, @"images\team");
                         var extension_new = Path.GetExtension(files[0].FileName);
 
-                        var imagePath = Path.Combine(webRootPath, teamdb.ImageUrl.TrimStart('\\'));
+                        var imagePath = Path.Combine(webRootPath, teamdb.Image
+                            .TrimStart('\\'));
                         if (System.IO.File.Exists(imagePath))
                         {
                             System.IO.File.Delete(imagePath);
                         }
 
-                        using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension_new), FileMode.Create))
+                        using (var fileStreams = new FileStream(Path.Combine(uploads, 
+                            fileName + extension_new), FileMode.Create))
                         {
                             files[0].CopyTo(fileStreams);
                         }
-                        team.ImageUrl = @"\images\team\" + fileName + extension_new;
+                        book.Image = @"\images\team\" + fileName + extension_new;
                     }
                     else
                     {
-                        team.ImageUrl = teamdb.ImageUrl;
+                        book.Image = teamdb.Image;
                     }
 
-                    _unitOfWork.Teams.Update(team);
+                    _db.Books.Update(book);
                 }
-                _unitOfWork.Save();
+                _db.SaveChanges();
                 return RedirectToAction(nameof(Index));
             }
             else
             {
-                return View(team);
+                return View(book);
             }
         }
-
 
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var serviceFromDb = _unitOfWork.Teams.Get(id);
+            var serviceFromDb = _db.Books.FirstOrDefault(c=>c.Id==id);
             string webRootPath = _hostEnvironment.WebRootPath;
-            var imagePath = Path.Combine(webRootPath, serviceFromDb.ImageUrl.TrimStart('\\'));
+            var imagePath = Path.Combine(webRootPath, serviceFromDb.Image.TrimStart('\\'));
             if (System.IO.File.Exists(imagePath))
             {
                 System.IO.File.Delete(imagePath);
@@ -122,20 +120,10 @@ namespace Vision.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            _unitOfWork.Teams.Remove(serviceFromDb);
-            _unitOfWork.Save();
+            _db.Books.Remove(serviceFromDb);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        #region API Calls
-        public IActionResult GetAll()
-        {
-            return Json(new { data = _unitOfWork.Teams.GetAll() });
-        }
-
-
-
-        #endregion
 
 
     }

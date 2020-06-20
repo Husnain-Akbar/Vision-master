@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vision.Data;
 
 namespace Vision.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200619132122_finaltouch")]
+    partial class finaltouch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,12 +251,7 @@ namespace Vision.Data.Migrations
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("QuoteId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("QuoteId");
 
                     b.ToTable("Books");
                 });
@@ -439,6 +436,9 @@ namespace Vision.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("BookId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
 
@@ -449,6 +449,8 @@ namespace Vision.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookId");
 
                     b.ToTable("Quotes");
                 });
@@ -602,15 +604,6 @@ namespace Vision.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Vision.Models.Book", b =>
-                {
-                    b.HasOne("Vision.Models.Quote", "Quote")
-                        .WithMany()
-                        .HasForeignKey("QuoteId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Vision.Models.Feedback", b =>
                 {
                     b.HasOne("Vision.Models.ApplicationUser", "ApplicationUser")
@@ -633,6 +626,13 @@ namespace Vision.Data.Migrations
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Vision.Models.Quote", b =>
+                {
+                    b.HasOne("Vision.Models.Book", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId");
                 });
 
             modelBuilder.Entity("Vision.Models.Service", b =>

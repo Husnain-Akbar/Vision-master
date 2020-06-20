@@ -12,6 +12,7 @@ namespace Vision.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
+
         }
 
         public DbSet<Category> Category { get; set; }
@@ -27,6 +28,11 @@ namespace Vision.Data
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
 
         public DbSet<WebImages> WebImages { get; set; }
+
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Quote> Quotes { get; set; }
+        public DbSet<NewsLetter> NewsLetters { get; set; }
+
 
     }
 }

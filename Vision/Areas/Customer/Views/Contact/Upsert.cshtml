@@ -4,8 +4,74 @@
     var title = "Create Contact";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="row">
+    <div class="col-md-6 col-md-offset-3">
+        <div class="well well-sm">
+            <form class="form-horizontal"  method="post" asp-action="Upsert">
 
-<form method="post" asp-action="Upsert">
+                <fieldset>
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    @if (Model.Id != 0)
+                    {
+                        <input type="hidden" asp-for="Id" />
+                        title = "Edit Category";
+                    }
+
+                    <div class="col-12">
+                        <h2 class="text-primary">@title</h2>
+                        <br />
+                    </div>
+
+                    <!-- Name input-->
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" asp-for="Name" for="name">Name</label>
+                        <div class="col-md-9">
+                            <input id="name" name="name" type="text" asp-for="Name" placeholder="Your name" class="form-control">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+                    <!-- Email input-->
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" asp-for="Email" for="email">Your E-mail</label>
+                        <div class="col-md-9">
+                            <input id="email" name="email" asp-for="Email" type="text" placeholder="Your email" class="form-control">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+
+                        </div>
+                    </div>
+
+                    <!-- Message body -->
+                    <div class="form-group">
+                        <label class="col-md-3 control-label" asp-for="Name" for="message">Your message</label>
+                        <div class="col-md-9">
+                            <textarea class="form-control" id="message" asp-for="Message" name="message" placeholder="Please enter your message here..." rows="5"></textarea>
+                            <span asp-validation-for="Message" class="text-danger"></span>
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-8 offset-4">
+                            @if (Model.Id != 0)
+                            {
+                                //Edit button and back to list
+                                <partial name="_EditAndBackToListButton" model="Model.Id" />
+                            }
+                            else
+                            {
+                                //Create button and back to list
+                                <partial name="_CreateAndBackToListButton" />
+                            }
+                        </div>
+                    </div>
+                    
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+@*<form method="post" asp-action="Upsert">
 
     <div class="row px-2 mx-2 backgroundWhite border">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -66,4 +132,4 @@
 
     </div>
 
-</form>
+</form>*@

@@ -1,0 +1,42 @@
+﻿@{ Layout = null;
+        
+    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="~/css/normalize.css" type="text/css">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/materialdesignicons.min.css" type="text/css">
+    <link rel="stylesheet" href="~/css/style.css" type="text/css">
+</head>
+<body>
+    <section class="home" id="home">
+        <div class="titles">
+            <div class="titles-wrap">
+                <h1>We'are<span> Shan Group</span></h1>
+                <h2><span class="txt-rotate">   </span></h2>
+                <div class="getintouch">
+                    <div><a asp-area="Customer" asp-controller="Home"
+                            asp-action="Index" class="btn" style="width:auto;">Lets Move To The Technical World
+                            
+                        </a>
+                    </div>
+                    <div class="">
+                        <a asp-area="Customer" asp-controller="Travel"asp-action="Index"
+                                class="btn travel"  style="width:auto;">
+                            Lets Travel The World Together
+                        </a>
+                    </div>
+                </div>
+                </div>
+            </div>
+    </section>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/js/bootstrap.min.js"></script>
+    <script src="~/js/typed.min.js"></script>
+    <script src="~/js/script.js"></script>
+</body>
+</html>

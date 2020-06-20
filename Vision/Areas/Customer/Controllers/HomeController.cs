@@ -31,6 +31,10 @@ namespace Vision.Controllers
             _logger = logger;
         }
 
+        public IActionResult First()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             HomeVM = new HomeViewModel()
@@ -43,6 +47,22 @@ namespace Vision.Controllers
             };
 
             return View(HomeVM);
+        }
+        [HttpPost]
+        public IActionResult Index(HomeViewModel model)
+        {
+            var date = DateTime.Now; 
+            var contact = new Contact() { 
+                Name=model.Contact.Name,
+                Email=model.Contact.Email,
+                Message=model.Contact.Message,
+                DateTime=date
+            };
+
+
+            _db.Add(contact);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public IActionResult Details(int id)
