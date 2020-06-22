@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Vision.Data.IRepository;
 using Vision.Models;
+using Vision.Utility;
 
 namespace Vision.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+
     public class TeamController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -50,59 +54,19 @@ namespace Vision.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                string webRootPath = _hostEnvironment.WebRootPath;
-                var files = HttpContext.Request.Form.Files;
-                if (team.Id == 0)
-                {
-                    //New Service
-                    string fileName = Guid.NewGuid().ToString();
-                    var uploads = Path.Combine(webRootPath, @"images\team");
-                    var extension = Path.GetExtension(files[0].FileName);
-
-                    using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension), FileMode.Create))
-                    {
-                        files[0].CopyTo(fileStreams);
-                    }
-                    team.ImageUrl = @"\images\team\" + fileName + extension;
-
                     _unitOfWork.Teams.Add(team);
                 }
                 else
                 {
                     //Edit Service
                     var teamdb = _unitOfWork.Teams.Get(team.Id);
-                    if (files.Count > 0)
-                    {
-                        string fileName = Guid.NewGuid().ToString();
-                        var uploads = Path.Combine(webRootPath, @"images\team");
-                        var extension_new = Path.GetExtension(files[0].FileName);
-
-                        var imagePath = Path.Combine(webRootPath, teamdb.ImageUrl.TrimStart('\\'));
-                        if (System.IO.File.Exists(imagePath))
-                        {
-                            System.IO.File.Delete(imagePath);
-                        }
-
-                        using (var fileStreams = new FileStream(Path.Combine(uploads, fileName + extension_new), FileMode.Create))
-                        {
-                            files[0].CopyTo(fileStreams);
-                        }
-                        team.ImageUrl = @"\images\team\" + fileName + extension_new;
-                    }
-                    else
-                    {
-                        team.ImageUrl = teamdb.ImageUrl;
-                    }
-
                     _unitOfWork.Teams.Update(team);
                 }
                 _unitOfWork.Save();
                 return RedirectToAction(nameof(Index));
-            }
-            else
-            {
-                return View(team);
-            }
+            
+            
+            
         }
 
 
@@ -110,12 +74,6 @@ namespace Vision.Areas.Admin.Controllers
         public IActionResult Delete(int id)
         {
             var serviceFromDb = _unitOfWork.Teams.Get(id);
-            string webRootPath = _hostEnvironment.WebRootPath;
-            var imagePath = Path.Combine(webRootPath, serviceFromDb.ImageUrl.TrimStart('\\'));
-            if (System.IO.File.Exists(imagePath))
-            {
-                System.IO.File.Delete(imagePath);
-            }
 
             if (serviceFromDb == null)
             {

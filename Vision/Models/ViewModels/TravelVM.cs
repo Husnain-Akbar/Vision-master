@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -13,6 +14,15 @@ namespace Vision.Models.ViewModels
         public string Depart { get; set; }
         [Required]
         public string Arrival { get; set; }
+        public string Class { get; set; }
+        [Required]
 
+        public Contact Contact { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Remote(action: "IsEmailInUse", controller: "Travel")]
+
+        public string NewsLetter { get; set; }
     }
 }

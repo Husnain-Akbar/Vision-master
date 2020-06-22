@@ -23,15 +23,16 @@ namespace Vision.Areas.Customer.Controllers
             return RedirectToAction("Results", new
             {
                 Arrival = travel.Arrival,
-                Depart = travel.Depart
+                Depart = travel.Depart,
+                Class=travel.Class
 
             });
         }
 
-        public IActionResult Results(string Arrival, string Depart)
+        public IActionResult Results(string Arrival, string Depart,string Class)
         {
             var books = _db.Books.Where(book => book.DepartFrom.ToLower().Contains(Depart)
-            || book.ArriveTo.ToLower().Contains(Arrival));
+            || book.ArriveTo.ToLower().Contains(Arrival) || book.Class.ToLower().Contains(Class));
 
             TravelVM newTravel = new TravelVM
             {

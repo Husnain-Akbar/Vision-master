@@ -22,7 +22,6 @@ namespace Vision.Data.Repository
             objFromDb.Name = team.Name;
             objFromDb.Description = team.Description;
             objFromDb.Role = team.Role;
-            objFromDb.ImageUrl = team.ImageUrl;
             db.SaveChanges();
 
         }

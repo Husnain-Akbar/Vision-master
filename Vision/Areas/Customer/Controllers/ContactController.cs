@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Vision.Data.IRepository;
 using Vision.Models;
+using Vision.Utility;
 
 namespace Vision.Areas.Customer.Controllers
 {
@@ -16,6 +18,8 @@ namespace Vision.Areas.Customer.Controllers
         {
             _unitOfWork = unitOfWork;
         }
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+
         public IActionResult Index()
         {
             return View();
@@ -57,6 +61,8 @@ namespace Vision.Areas.Customer.Controllers
             }
             return View(form);
         }
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+
         [HttpGet]
         public IActionResult Delete(int id)
         {
@@ -76,6 +82,8 @@ namespace Vision.Areas.Customer.Controllers
         #region API CALLS
 
         [HttpGet]
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+
         public IActionResult GetAll()
         {
             return Json(new { data = _unitOfWork.Contacts.GetAll() });

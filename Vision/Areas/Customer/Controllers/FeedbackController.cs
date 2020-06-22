@@ -11,6 +11,7 @@ using Vision.Data;
 using Vision.Data.IRepository;
 using Vision.Models;
 using Vision.Models.ViewModels;
+using Vision.Utility;
 
 namespace Vision.Areas.Customer.Controllers
 {
@@ -27,6 +28,8 @@ namespace Vision.Areas.Customer.Controllers
             
 
         }
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+
         public IActionResult Index()
 
         {
@@ -96,6 +99,8 @@ namespace Vision.Areas.Customer.Controllers
             }
             return View(form);
         }
+        [Authorize(Roles = SD.Role_Admin + "," + SD.Role_Employee)]
+
         [HttpGet]
         public IActionResult Delete(int id)
         {

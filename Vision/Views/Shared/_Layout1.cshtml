@@ -7,70 +7,72 @@
 
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
-    <style>
-        body, h1, h2, h3, h4, h5, h6 {
-            font-family: "Raleway", Arial, Helvetica, sans-serif
-        }
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
 
-        .myLink {
-            display: none
-        }
-    </style>
 
 </head>
 <body>
     <header>
+        <div style="width:100%;height:50px;background-color:black">
+            <h1 style="height:40px; color:white"><b>Shan Group</b></h1>
+            <h5 style="margin-left:850px; margin-top:-25px; color:white">
+                <i class="fa fa-phone"></i>
+                123-456-789
+            </h5>
+            <h5 style="margin-left:1050px; margin-top:-25px;color:white">
+                <i class="fa fa-envelope"></i>
+                shan999@gmail.com
+            </h5>
+
+        </div>
+
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light
              border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home"
+                <a class="navbar-brand" asp-area="Customer" asp-controller="Travel"
                    asp-action="Index">SHAN TRAVEL</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" 
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-              
+
                     <ul class="navbar-nav flex-grow-1">
 
-                       
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#"
-                                   id="navbarDropdown" role="button" 
-                                   data-toggle="dropdown" aria-haspopup="true" 
-                                   aria-expanded="false">
-                                    Content Management System
-                                </a>
-                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                                    <a class="dropdown-item" asp-area="Admin"
-                                       asp-controller="Category" asp-action="Index">Category</a>
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Frequency" asp-action="Index">Frequency</a>
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Service" asp-action="Index">Service</a>
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="Team" asp-action="Index">Team</a>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link text-black-50" onclick="return false;" onmousedown="autoScrollTo('div1');">
+                                Tours
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
 
-                                </div>
-                            </li>
-                        
-                        </div></div>
+                            <a href="#" onclick="return false;" class="nav-link text-black-50"
+                               onmousedown="autoScrollTo('div2');">
+                                Contact Us
+                            </a>
+                        </li>
 
-                    
-                
-           
+
+                    </ul>
+                </div>
+            </div>
+
+
+
+
         </nav>
     </header>
 
     <!-- Navigation Bar -->
 
-    <div>
+    <div class="container-fluid">
         @RenderBody()
     </div>
     <!-- Footer -->
@@ -87,6 +89,19 @@
 
     </footer>
 
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/typed.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/8d479b36d5.js" crossorigin="anonymous"></script>
+
+    @RenderSection("Scripts", required: false)
 
 </body>
 </html>

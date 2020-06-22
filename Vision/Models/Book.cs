@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Vision.Models
 {
@@ -18,8 +16,10 @@ namespace Vision.Models
         public DateTime Begin { get; set; }
         public DateTime End { get; set; }
 
-        public int QuoteId { get; set; }
-        public Quote Quote { get; set; 
+        public decimal Price { get; set; }
+
+        public decimal Price50 { get; set; }
+        public ICollection<Quote> Quotes { get; set; 
         }
     }
 }

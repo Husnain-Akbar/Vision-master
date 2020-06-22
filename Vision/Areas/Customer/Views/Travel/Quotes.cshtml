@@ -1,4 +1,4 @@
-﻿@model Vision.Models.Quote
+﻿@model Vision.Models.ViewModels.BookVM
 
 @{
     ViewData["Title"] = "Quotes";
@@ -6,24 +6,27 @@
 }
 
 
-@*<div class="py-4">
+<div class="py-4">
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row form-group">
         <div class="col-8 offset-2">
             <div class="card">
                 <div class="card-body px-lg-5 pt-4">
-                    <form autocomplete="off"  method="post" asp-action="Quote">
-                        <h3 class="col-12 text-success text-center py-4">
+                    <form autocomplete="off"  method="post" asp-action="Quotes">
+                        <input type="hidden" asp-for="Book.Id"/>
+                        <h3 class="col-12 text-dark text-center py-4">
                                 <strong>Register A Quote</strong>
                             
                         </h3>
                         <hr />
                         <div class="py-2">
                             <input asp-for="Book.DepartFrom"  class="form-control" />
-                            <span asp-validation-for="Book.DepartFrom" class="text-danger"></span>
+                            <span asp-validation-for="Book.DepartFrom" 
+                                  class="text-danger"></span>
                         </div>
                         <div class="py-2">
-                            <input asp-for="Book.ArriveTo" type="email" class="form-control" />
+                            <input asp-for="Book.ArriveTo" 
+                                   class="form-control" />
                             <span asp-validation-for="Book.ArriveTo
                                   " class="text-danger"></span>
                         </div>
@@ -37,33 +40,33 @@
                         </div>
                         <div class="form-row py-2">
                             <div class="col">
-                                <input asp-for="Name" placeholder="State" class="form-control" />
-                                <span asp-validation-for="Name" class="text-danger"></span>
+                                <input asp-for="Quote.Name" placeholder="Your Name" class="form-control" />
+                                <span asp-validation-for="Quote.Name" class="text-danger"></span>
                             </div>
                             <div class="col">
-                                <input asp-for="Email" placeholder="Postal Code" class="form-control" />
-                                <span asp-validation-for="Email" class="text-danger"></span>
+                                <input asp-for="Quote.Email" placeholder="Email" class="form-control" />
+                                <span asp-validation-for="Quote.Email" 
+                                      class="text-danger"></span>
                             </div>
 
                         </div>
                         <div class="form-row py-2">
                             <div class="col">
-                                <textarea asp-for="Message"   class="form-control" ></textarea>
-                                <span asp-validation-for="Message" class="text-danger"></span>
-                            </div>
+                                <textarea asp-for="Quote.Message" class="form-control" >
 
+                                </textarea>
+                                <span asp-validation-for="Quote.Message" 
+                                      class="text-danger"></span>
+                            </div>
                         </div>
                         <div class="py-2">
-                            <button type="submit" class="btn btn-success form-control">
-                            Request A Quote</button>
+                            <button type="submit" class="btn btn-dark form-control">
+                                Request A Quote
+                            </button>
                         </div>
                     </form>
-
-                            
                 </div>
             </div>
         </div>
     </div>
-</div>*@
-
-
+</div>

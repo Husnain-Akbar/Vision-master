@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Vision.Models
 {
@@ -13,6 +9,7 @@ namespace Vision.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string Message { get; set; }
-//        public virtual Book Book { get; set; }
+        public  Book Book { get; set; }
+        public int BookId { get; set; }
     }
 }

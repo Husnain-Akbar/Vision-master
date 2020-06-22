@@ -191,3 +191,12 @@ body {
     top:10%;
     right:30%;
 }
+#left{
+    position:relative;
+    left:70%;
+    top:20%;
+    width:auto;
+    height:20px;
+    background-color:black;
+    color:azure;
+}

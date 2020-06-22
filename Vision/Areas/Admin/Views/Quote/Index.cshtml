@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Vision.Models.Quote>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Message
+            </th>
+            <th>
+                Class
+            </th>
+            <th>
+                Depart From
+            </th>
+            <th>
+                Arrive To
+            </th>
+            <th>
+                Start Date
+            </th>
+            <th>
+                Return Data
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Message)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Class)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.DepartFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.ArriveTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.Begin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Book.End)
+            </td>
+
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

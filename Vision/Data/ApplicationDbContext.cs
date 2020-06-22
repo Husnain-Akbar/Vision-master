@@ -33,6 +33,13 @@ namespace Vision.Data
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<NewsLetter> NewsLetters { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new QuoteConfig());
+
+        }
+
 
     }
-}
+    }
